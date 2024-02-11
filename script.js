@@ -1,24 +1,55 @@
-const dino = document.getElementById("dino");
-const cactus = document.getElementById("cactus");
+kaboom();
 
-document.addEventListener("keydown", function(event) {
-    jump();
-});
+const GRAVITY = 3200;
+const WIDTH = width();
+const HEIGHT = height();
 
-function jump () {
-    if (dino.classList != "jump") {
-        dino.classList.add("jump") 
-    }
-    setTimeout( function() {
-        dino.classList.remove("jump")
-    }, 300)
+const BACKGROUND_COLOR = Color.fromHex('b6e5ea');
+const PIPE_COLOR = Color.fromHex('#74c02e');
+
+const PIPE_WIDTH = 64;
+const PIPE_BORDER = 4;
+const PIPE_OPEN = 245;
+const PIPE_MIN_HEGHT = 60;
+const JUMP_FORCE = 800;
+const SPEED = 320;
+const CEILING = -60;
+
+loadSprite("bird", "/png/bird.png")
+
+loadSound("score","/png/score.mp3")
+loadSound("jump","/png/jump.mp3")
+loadSound("hit","/png/hit.mp3")
+
+setGravity(GRAVITY);
+
+setBackground(BACKGROUND_COLOR)
+
+
+const startGame = () => {
+    go("game");
 }
 
-let isAlive = setInterval ( function() {
-    let dinoTop = parseInt(window.getComputedStyle(dino).getPropertyValue("top"));
-    let cactusLeft = parseInt(window.getComputedStyle(cactus).getPropertyValue("left"));
+scene("game", () => {
+   let score = 0
 
-    if (cactusLeft < 50 && cactusLeft > 0 &&  dinoTop >= 140) {
-        console.log("game OVER!!")
-    }
-}, 10)
+   const game = add([timer()]);
+
+   const createBird = () => {
+    const bird = game.add([
+        sprite("bird"),
+        pos(WIDTH/4, 0),
+        area(),
+        body(),
+    ])
+
+    return bird;
+   } 
+
+   const bird = createBird();
+   });
+
+scene("lose", () => {});
+
+startGame();
+
