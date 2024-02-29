@@ -74,8 +74,8 @@ function draw() {
 
 
     }
-    ctx.drawImage(pipeUp, 100, 0);
-    ctx.drawImage(pipeBottom, 100, 0 + pipeUp.height + gap);
+    //ctx.drawImage(pipeUp, 100, 0);
+    //ctx.drawImage(pipeBottom, 100, 0 + pipeUp.height + gap);
     ctx.drawImage(fg, 0, cvs.height - fg.height);
     ctx.drawImage(bird, xPos, yPos);
 
